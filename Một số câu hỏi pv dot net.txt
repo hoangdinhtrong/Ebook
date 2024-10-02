@@ -1,0 +1,87 @@
+- Tại sao bạn nghỉ công ty cũ
+	+ Không trải lòng
+	+ Chém: Em học thêm các công nghệ mới và muốn tham gia thực tế
+
+- Domain Driven Design
+	
+1. Interface và Abstract class
+	- Giống:
+		+ Không tạo được instance
+	
+	- Khác:
+		+ Abstract class có contructor, interface thì không có
+		+ Abstract class có property và field, còn interface chỉ có property
+		Note: Property (getter, setter), Field không có getter, setter
+		+ Class chỉ kế thừa 1 Abstract nhưng có thể kế thừa nhiều interface
+		+ Abstract có thể định nghĩa các hàm cho những class con dùng chung, interface chỉ khai báo hàm 
+		
+	- Bản chất:
+		+ Abstract class tạo ra nhằm mục đích cho phép các class con dùng chung các thuộc tính hoặc hàm
+		+ Interface tạo ra các contract bắt buộc các class triển khai nó phải triển khai các hàm mà nó đã define
+
+2. Paging
+	- paging sql
+	- Th scroll, sử dụng counsor (column tự tăng trong db)
+
+3. Middleware
+	- Middleware là gì?
+		+ Là một đoạn code (component) được đặt vào trong application pipleline
+		+ Nó xử lý request và response trả về
+		
+	- Middleware pipleline order
+		+ Exception Middleware Handler
+		+ HSTS
+		+ HttpsRedirection
+		+ Static Files
+		+ Routing
+		+ CORS
+		+ Authentication
+		+ Authorization
+		+ Custom Middleware
+		+ Endpoint
+		
+	- Define Middleware
+		+ sử dụng method app.Use(function (httpContext, next)
+		Note: next chỉ chạy đến middleware tiếp theo
+		
+		+ Tạo một conventional middleware, khai báo singleton trong application
+		Note: RequestDelegate inject trong contructor, vì nó là singleton nên các DI không phải singleton phải inject vào function Invoke
+		
+		+ Kế thừa IMiddleware interface
+		Note: Phải define DI 		
+
+4. Repository và UnitOfWork
+	- Repository: khi thay đổi logic làm việc với database => không cần thay đổi tầng Service
+	- UnitOfWork: dễ dàng define code trước khi save xuống database
+	
+5. Service Lifecycle
+	+ Singleton => Chia sẻ tài nguyên khi application run
+	+ Transient => Không chia sẻ tài nguyên (luôn tạo một tối tượng mới)
+	+ Scope => Chia sẻ tài nguyên trong cùng 1 http request
+	
+	=> Không thể inject scope vào singleton
+	- Background job, sử dụng Scope Provider
+	
+6. CQRS - Event Sourcing
+	- Outbox pattern và Idempotence pattern
+	
+7. JWt
+	+ Build Token Management
+	
+8. IQueryable và IEnumable
+	+ IQueryable => tạo ra các câu query
+	+ IEnumable => đã thực hiện query và lưu vào RAM
+	
+9. Async Await
+	+ Vertical Scale / Horizontal Scale
+		- Horizontal Scale: Server có thể xử lý một lượng request nhất định => Nếu lớn hơn thì tạo một server mới
+		- Vertical Scale: Thêm RAM, CPU 
+		
+	
+	+ Synchronous / Asynchronous Programming 
+		
+		
+	+ Task
+	+ ThreadPool
+	+ Thread 
+		- Một tiến trình mà có thể chia sẻ tài nguyên
